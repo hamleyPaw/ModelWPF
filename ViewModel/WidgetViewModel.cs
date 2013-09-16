@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MVVMTemplate.ViewModel {
-    public class NewWidgetViewModel : ViewModelBase {
+    public class WidgetViewModel : ViewModelBase {
 
         // Responsibility...
         // Gather the details necessary for a new Widget

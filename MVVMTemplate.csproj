@@ -72,7 +72,7 @@
     <Compile Include="ViewModel\IUserInterfaceContext.cs" />
     <Compile Include="ViewModel\IViewModelContext.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NewWidgetViewModel.cs" />
+    <Compile Include="ViewModel\WidgetViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\SubView.xaml.cs">
