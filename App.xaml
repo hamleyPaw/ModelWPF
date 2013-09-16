@@ -1,0 +1,11 @@
+﻿<Application x:Class="MVVMTemplate.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:converters="clr-namespace:MVVMTemplate.Converters"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <converters:VisibleOnNullConverter
+            x:Key="VisibleOnNullConverter" />
+        <converters:CollapsedOnNullConverter
+            x:Key="CollapsedOnNullConverter" />
+    </Application.Resources>
+</Application>
