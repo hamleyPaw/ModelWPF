@@ -30,8 +30,7 @@ namespace MVVMTemplate.ViewModel {
         }
 
         // Responsibilities...
-        // Closing the app...
-        // Opening a sub-view
+        // Close (could be called from a menu option)
 
         private RelayCommand closeCommand;
         public ICommand CloseCommand {

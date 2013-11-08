@@ -18,6 +18,8 @@ namespace MVVMTemplate.ViewModel {
             get { return context; }
         }
 
+        // ?? Does this need to be at the Base level
+        // ?? is anyone other than the Main View going to use it
         public event EventHandler RequestClose;
 
         protected void OnRequestClose() {

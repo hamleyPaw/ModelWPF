@@ -64,6 +64,7 @@
     <Compile Include="Contexts\ViewModelContext.cs" />
     <Compile Include="Converters\VisibleOnNullConverter.cs" />
     <Compile Include="Converters\CollapsedOnNullConverter.cs" />
+    <Compile Include="Model\Widget.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

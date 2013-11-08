@@ -8,9 +8,18 @@ using MVVMTemplate.ViewModel.Contexts;
 
 namespace MVVMTemplate.Contexts {
     public class ViewModelContext : IViewModelContext {
+
+        // This should not pass a Window, pass in the UserContext
+        // Is it testable with a window?
+
+        // This should also include a service that will deal
+        // with interaction with the repository
+
         public ViewModelContext(Window mainWindow) {
             this.userInterface = new UserInterfaceContext(mainWindow);
         }
+
+        // Rename this as Interaction context
 
         private IUserInterfaceContext userInterface;
         public IUserInterfaceContext UserInterface {
