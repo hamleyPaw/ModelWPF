@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-using MVVMTemplate.ViewModel.Contexts;
+using MVVMTemplate.ViewModels.Contexts;
 
-namespace MVVMTemplate.ViewModel {
+namespace MVVMTemplate.ViewModels {
     public abstract class ViewModelBase : INotifyPropertyChanged {
         private readonly IViewModelContext context;
 

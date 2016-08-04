@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Input;
 using System.Diagnostics;
 
-namespace MVVMTemplate.ViewModel {
+namespace MVVMTemplate.ViewModels {
     public class RelayCommand : ICommand {
         readonly Action<object> _execute;
         readonly Predicate<object> _canExecute;

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-using MVVMTemplate.ViewModel;
+using MVVMTemplate.ViewModels;
 using MVVMTemplate.Contexts;
 using MVVMTemplate.Views;
 

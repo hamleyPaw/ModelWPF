@@ -1,65 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-
-using Microsoft.Win32;
-
+using System.Windows.Media;
+using MVVMTemplate.ViewModels.Contexts;
 using MVVMTemplate.Views;
-using MVVMTemplate.ViewModel;
-using MVVMTemplate.ViewModel.Contexts;
 
-namespace MVVMTemplate.Contexts {
-    public class UserInterfaceContext : IUserInterfaceContext {
-        private Stack<Window> windowStack = new Stack<Window>();
+namespace MVVMTemplate.Contexts
+{
+    public class UserInterfaceContext : IUserInterfaceContext
+    {
+        private readonly Stack<Window> _WindowStack = new Stack<Window>();
 
-        public UserInterfaceContext(Window mainWindow) {
-            this.windowStack.Push(mainWindow);
+        public UserInterfaceContext(Window mainWindow)
+        {
+            _WindowStack.Push(mainWindow);
         }
 
         #region IUserInterfaceContext Members
 
-        void IUserInterfaceContext.ShowMessage(string title, string message, Action closeAction) {
-            var result = MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
+        void IUserInterfaceContext.ShowMessage(string title, string message, Action closeAction)
+        {
+            MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
 
-            if (result == MessageBoxResult.OK && closeAction != null) {
+            if (result == MessageBoxResult.OK && closeAction != null)
+            {
                 closeAction();
             }
         }
 
-        void IUserInterfaceContext.GetMVVMTestSubView() {
+        void IUserInterfaceContext.GetMVVMTestSubView()
+        {
             var subWindow = new SubView();
-            this.ShowDialog(subWindow, null, true);
+            ShowDialog(subWindow, null, true);
         }
 
         #endregion
 
-        private void ShowDialog(Window dialog, Action<bool> onClosed, bool subDialog = false) {
-            dialog.Closed += (sender, args) => {
-                windowStack.Pop();
+        private void ShowDialog(Window dialog, Action<bool> onClosed, bool subDialog)
+        {
+            dialog.Closed += (sender, args) =>
+            {
+                _WindowStack.Pop();
 
-                if (onClosed != null) {
+                if (onClosed != null)
+                {
                     onClosed(dialog.DialogResult ?? false);
                 }
             };
 
-            if (subDialog && windowStack.Count > 0) {
-                dialog.Owner = windowStack.Peek();
+            if (subDialog && _WindowStack.Count > 0)
+            {
+                dialog.Owner = _WindowStack.Peek();
                 dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-                var mask = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.White);
+                var mask = new SolidColorBrush(Colors.White);
                 mask.Opacity = 0.5;
 
-                windowStack.Peek().OpacityMask = mask;
+                _WindowStack.Peek().OpacityMask = mask;
             }
 
-            windowStack.Push(dialog);
+            _WindowStack.Push(dialog);
 
             dialog.ShowDialog();
 
-            if (windowStack.Count > 0) {
-                windowStack.Peek().OpacityMask = null;
+            if (_WindowStack.Count > 0)
+            {
+                _WindowStack.Peek().OpacityMask = null;
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-using MVVMTemplate.ViewModel.Contexts;
+using MVVMTemplate.ViewModels.Contexts;
 
 namespace MVVMTemplate.Contexts {
     public class ViewModelContext : IViewModelContext {

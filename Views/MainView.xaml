@@ -9,18 +9,52 @@
     MinWidth="800"
     ResizeMode="CanResize">
     <Window.Resources>
-        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/MainDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto " />
+            <RowDefinition
+                Height="Auto " />
+            <RowDefinition
+                Height="Auto " />
+            <RowDefinition 
+                Height="Auto" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <!--<StackPanel Grid.Row="0" Orientation="Horizontal">-->
             <Button
+                Margin="5"
+                HorizontalAlignment="Right"
                 Content="Close"
                 Command="{Binding Path=CloseCommand}"
                 Width="100" />
-            <Button
+            <!--<Button
                 Content="Open Sub-View"
                 Command="{Binding Path=OpenSubViewCommand}"
-                Width="100" />
-        </StackPanel>
+                Width="100" />-->
+        <!--</StackPanel>-->
+        <CheckBox
+            Margin="5"
+            Grid.Row="1"
+            Content="Can Update"
+            IsChecked="{Binding CanUpdate}" />
+        <Label Grid.Row="2" Content="Update enabled" Visibility="{Binding CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <Button
+            Grid.Row="3"
+            Content="Update"
+            Command="{Binding Path=UpdateCommand}"
+            Width="70"
+            Margin="5" />
+        <TextBlock
+            Grid.Row="4"
+            Margin="5"
+            Text="{Binding Path=TestText}" />
     </Grid>
 </Window>
