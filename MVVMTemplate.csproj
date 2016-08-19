@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>MVVMTemplate.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SimpleInjector, Version=3.2.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>packages\SimpleInjector.3.2.0\lib\net45\SimpleInjector.dll</HintPath>
@@ -64,8 +67,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Contexts\UserInterfaceContext.cs" />
-    <Compile Include="Contexts\ViewModelContext.cs" />
+    <Compile Include="Models\IWidget.cs" />
+    <Compile Include="Models\Widget.cs" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\WidgetCreatorServant.cs" />
+    <Compile Include="Services\IWidgetCreatorServant.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Services\InteractionService.cs" />
     <Compile Include="Converters\VisibleOnNullConverter.cs" />
     <Compile Include="Converters\CollapsedOnNullConverter.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -73,13 +82,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\IUserInterfaceContext.cs" />
-    <Compile Include="ViewModels\IViewModelContext.cs" />
+    <Compile Include="Services\IInteractionService.cs" />
+    <Compile Include="ViewModels\IWidgetViewModel.cs" />
+    <Compile Include="ViewModels\PropertyNameHelper.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\SubView.xaml.cs">
-      <DependentUpon>SubView.xaml</DependentUpon>
+    <Compile Include="ViewModels\WidgetViewModel.cs" />
+    <Compile Include="Views\WidgetView.xaml.cs">
+      <DependentUpon>WidgetView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\MainDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -97,7 +108,7 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SubView.xaml">
+    <Page Include="Views\WidgetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,9 +137,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

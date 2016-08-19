@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MVVMTemplate.ViewModels.Contexts {
-    public interface IUserInterfaceContext {
+namespace MVVMTemplate.Services {
+    public interface IInteractionService {
         void ShowMessage(string title, string message, Action closeAction);
 
-        void GetMVVMTestSubView();
+        void ShowMVVMTestSubView();
     }
 }

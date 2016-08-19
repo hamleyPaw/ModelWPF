@@ -2,23 +2,28 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
-using MVVMTemplate.ViewModels.Contexts;
 using MVVMTemplate.Views;
 
-namespace MVVMTemplate.Contexts
+namespace MVVMTemplate.Services
 {
-    public class UserInterfaceContext : IUserInterfaceContext
+    public class InteractionService : IInteractionService
     {
         private readonly Stack<Window> _WindowStack = new Stack<Window>();
 
-        public UserInterfaceContext(Window mainWindow)
+        public InteractionService()
         {
-            _WindowStack.Push(mainWindow);
+            //if (parentWindow == null)
+            //{
+            //    throw new ArgumentNullException("parentWindow");
+            //}
+
+            //_WindowStack.Push(parentWindow);
+
         }
 
         #region IUserInterfaceContext Members
 
-        void IUserInterfaceContext.ShowMessage(string title, string message, Action closeAction)
+        public void ShowMessage(string title, string message, Action closeAction)
         {
             MessageBoxResult result = MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -28,10 +33,10 @@ namespace MVVMTemplate.Contexts
             }
         }
 
-        void IUserInterfaceContext.GetMVVMTestSubView()
+        public void ShowMVVMTestSubView()
         {
-            var subWindow = new SubView();
-            ShowDialog(subWindow, null, true);
+            //var subWindow = new SubView();
+            //ShowDialog(subWindow, null, true);
         }
 
         #endregion
@@ -59,6 +64,8 @@ namespace MVVMTemplate.Contexts
                 _WindowStack.Peek().OpacityMask = mask;
             }
 
+            dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            
             _WindowStack.Push(dialog);
 
             dialog.ShowDialog();

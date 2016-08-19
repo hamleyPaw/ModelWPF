@@ -2,30 +2,24 @@
 using System.ComponentModel;
 using System.Linq.Expressions;
 
-using MVVMTemplate.ViewModels.Contexts;
-
 namespace MVVMTemplate.ViewModels {
-    public abstract class ViewModelBase : INotifyPropertyChanged {
-        private readonly IViewModelContext context;
-
-        public ViewModelBase() { }
-
-        public ViewModelBase(IViewModelContext context) {
-            this.context = context;
+    public abstract class ViewModelBase : INotifyPropertyChanged
+    {
+        public ViewModelBase()
+        {
+            
         }
 
-        public IViewModelContext Context {
-            get { return context; }
-        }
+        public event EventHandler<DialogCloseEventArgs> RequestClose;
 
-        // ?? Does this need to be at the Base level
-        // ?? is anyone other than the Main View going to use it
-        public event EventHandler RequestClose;
+        protected void OnRequestClose(bool? dialogAccepted)
+        {
+            var handler = this.RequestClose;
 
-        protected void OnRequestClose() {
-            EventHandler handler = this.RequestClose;
             if (handler != null)
-                handler(this, EventArgs.Empty);
+            {
+                handler(this, new DialogCloseEventArgs(dialogAccepted));
+            }
         }
 
         #region INotifyPropertyChanged Members
@@ -39,7 +33,8 @@ namespace MVVMTemplate.ViewModels {
         /// Raises this object's PropertyChanged event.
         /// </summary>
         /// <param name="propertyName">The property that has a new value.</param>
-        protected virtual void OnPropertyChanged(string propertyName) {
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
@@ -49,29 +44,33 @@ namespace MVVMTemplate.ViewModels {
         /// Use a lambda expression to ensure we get the correct name
         /// </summary>
         /// <param name="expression">A lambda expression of the propery that has a new value.</param>
-        protected void OnPropertyChanged(Expression<Func<object>> expression) {
-            if (this.PropertyChanged != null) {
+        protected void OnPropertyChanged(Expression<Func<object>> expression)
+        {
+            if (this.PropertyChanged != null)
+            {
                 this.OnPropertyChanged(PropertyNameHelper.GetPropertyName(expression));
             }
         }
 
-        public static class PropertyNameHelper {
-            public static string GetPropertyName(Expression<Func<object>> expression) {
-                return GetPropertyNameUntyped(expression);
-            }
+       
 
-            public static string GetPropertyNameUntyped(LambdaExpression untypedExpression) {
-                Expression body = ((LambdaExpression)untypedExpression).Body;
+        #endregion INotifyPropertyChanged Members
+    }
 
-                // if expression if of the form x => (T)x.Property, remove the cast
-                if (body.NodeType == ExpressionType.Convert) {
-                    body = ((UnaryExpression)body).Operand;
-                }
-
-                return ((MemberExpression)body).Member.Name;
+    public class DialogCloseEventArgs : EventArgs
+    {
+        private bool? _DialogAccepted;
+        public bool? DialogAccepted
+        {
+            get
+            {
+                return _DialogAccepted;
             }
         }
 
-        #endregion INotifyPropertyChanged Members
+        public DialogCloseEventArgs(bool? dialogAccepted)
+        {
+            _DialogAccepted = dialogAccepted;
+        }
     }
 }

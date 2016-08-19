@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:MVVMTemplate.Converters"
+                    xmlns:viewModels="clr-namespace:MVVMTemplate.ViewModels"
+                    xmlns:views="clr-namespace:MVVMTemplate.Views">
+    <!-- Converters -->
+    <converters:VisibleOnNullConverter
+        x:Key="VisibleOnNullConverter" />
+    <converters:CollapsedOnNullConverter
+        x:Key="CollapsedOnNullConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    
+    <!-- Styles -->
+    
+    <!-- View Templates -->
+    <!--<DataTemplate
+        DataType="{x:Type viewModels:WidgetViewModel}">
+        <views:WidgetView />
+    </DataTemplate>-->
+    
+</ResourceDictionary>
